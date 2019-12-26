@@ -77,9 +77,9 @@ print(transactions_data.isnull().sum())
 mdv=0
 totel=0
 for i,t_df in transactions_data.groupby(['id']):
-    if len(t_df)>1:
-        mdv+=len(t_df.dept.unique())
-    totel+=len(t_df)
+    if t_df.count()>1:
+        mdv+=t_df.dept.nunique()
+    
 print("Total multiple transactions  on different department is: "+str(mdv))
 print("Total transactions are: "+str(total))
 
