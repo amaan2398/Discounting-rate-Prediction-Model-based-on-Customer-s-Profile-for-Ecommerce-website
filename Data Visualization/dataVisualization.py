@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Dec 25 09:25:11 2019
+
+@author: outsi
+"""
 import os
 import pandas as pd
 #import numpy as np
@@ -6,7 +12,7 @@ import pandas as pd
 
 
 # =============================================================================
-# WHAT IS THE PERCENTAGE OF CUSTOMERS WHO DID MULTIPLE TRANSACTIONS  ON SAME DEPARTMENT
+# 1)WHAT IS THE PERCENTAGE OF CUSTOMERS WHO DID MULTIPLE TRANSACTIONS  ON SAME DEPARTMENT
 # =============================================================================
 
 print("data is loading...")
@@ -28,7 +34,8 @@ print(transactions_data.isnull().sum())
 
 print("Departments")
 deptU = transactions_data.dept.unique()
-deptU.sort()#48 52 61 66 68 76 77 80 83 84 85 86 87 88 89 90 93 this dept are not present in dataframe
+deptU.sort()#48 52 61 66 68 76 77 80 83 84 85 86 87 88 89 90 93 this dept 
+            #are not present in dataframe
 print(deptU)
 
 listP=[]
@@ -48,7 +55,7 @@ df = pd.DataFrame({'percentage':listP, 'index':deptU})
 ax = df.plot.bar(x='index',y='percentage',rot= 90, figsize = (84 , 10))
 
 # =============================================================================
-# What is the percentage of customers who did multiple transactions  on different department
+# 2)What is the percentage of customers who did multiple transactions  on different department
 # =============================================================================
 
 print("data is loading...")
@@ -87,7 +94,7 @@ df = pd.DataFrame({ 'percentage' : [ mdv ] })
 ax = df.plot.bar( y = 'percentage', rot = 0 , figsize=(10 , 20))
 
 # =============================================================================
-# What is the percentage of customers who did multiple transactions  on same category
+# 3)What is the percentage of customers who did multiple transactions  on same category
 # =============================================================================
 
 print("data is loading...")
@@ -124,7 +131,7 @@ ax = df.plot.scatter(x='index',y='percentage',rot= 90, figsize = (50 , 10))
 
 
 # =============================================================================
-# What is the percentage of customers who did multiple transactions  on different category
+# 4)What is the percentage of customers who did multiple transactions  on different category
 # =============================================================================
 
 print("data is loading...")
@@ -144,22 +151,25 @@ transactions_data.shape
 print("Data Containg Null values count by columns")
 print(transactions_data.isnull().sum())
 
+#INCOMPLETE COMPLETE
+
+
 # T=len(transactions_data.id)
 # U=len(transactions_data['id'].append(transactions_data['category']).unique())
 # prct = ((T - U) / T)
 # print(prct)
 # df = pd.DataFrame({ 'percentage' : [ prct ] })
 # ax = df.plot.bar( y = 'percentage', rot = 0 , figsize=(10 , 20))
-g = transactions_data.groupby(['id','category'])
+# g = transactions_data.groupby(['id','category'])
 
-for i,id_df in g:
+# for i,id_df in g:
     
 
 
 
 
 # =============================================================================
-# What is the percentage of customers who did multiple transactions
+# 5)What is the percentage of customers who did multiple transactions
 # =============================================================================
 
 print("data is loading...")
@@ -186,16 +196,87 @@ print(prct)
 df = pd.DataFrame({ 'percentage' : [ prct ] })
 ax = df.plot.bar( y = 'percentage', rot = 0 , figsize=(10 , 20))
 
+# =============================================================================
+# 6)Do customers change brand while repeat purchasing in same product category, what percentage?
+# =============================================================================
+
+print("data is loading...")
+os.chdir("D:\\Final project\\Datasets\\acquire-valued-shoppers-challenge\\transactions")
+transactions_data = pd.read_csv("t0.csv",usecols = ['id','category','brand'])
+print("Data is loaded")
+
+print("Data info")
+transactions_data.info()
+
+print("Data Size")
+transactions_data.size
+
+print("Data Shape")
+transactions_data.shape
+
+print("Data Containg Null values count by columns")
+print(transactions_data.isnull().sum())
+
+print("Unique depertments...")
+print(len(transactions_data.brand.unique()))
+
+print("Created an csv for data id and change brand over same Category")
+f=open("id_changBrandOverSamCategory0.csv","w")
+
+f.write("id,changBrandOverSamCategory\n")
+
+for i,t_df_id in transactions_data.groupby(['id']):
+    countY=0
+    countN=0
+    for j,t_df_cat in t_df_id.groupby(['category']):
+        if len(t_df_cat.barnd)>1:
+            if len(t_df_cat.barnd.unique())>1:
+                countY+=1
+            else:
+                countN+=1
+    if countY > 0 and countN > 0:
+        if countY > countN:
+            f.write(str(id)+",Y\n")
+        elif countY < countN:
+            f.write(str(id)+",N\n")
+        elif countY == countN:
+            f.write(str(id)+",C\n")
+
+f.close()
 
 
 
-df = pd.DataFrame({'A':[1,2,3,4,4,4,5],'B':[11,12,12,12,13,13,11]})
-print(df)
-x=df.groupby(['A'])
-print(len(x))
-k=[]
-for a,b in x:
-    if len(b)>1:
-        print(a,b)
 
-print(df)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
