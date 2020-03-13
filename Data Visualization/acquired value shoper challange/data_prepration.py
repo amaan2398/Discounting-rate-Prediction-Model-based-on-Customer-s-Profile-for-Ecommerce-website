@@ -150,3 +150,38 @@ df.info()
 df.shape
 pd.DataFrame(df).to_csv(r'D:\\Final project\\Datasets\\acquire-valued-shoppers-challenge\\ModelData\\DatasetComp.csv', index = False)
 
+#######################################################################
+
+
+os.chdir("D:\\Final project\\Datasets\\acquire-valued-shoppers-challenge\\ModelData")
+df = pd.read_csv("DatasetComp.csv")
+
+
+
+LstBrand=[]
+for i in df.Brand:
+    LstBrand.append('B'+str(i))
+
+df['CBrand']=LstBrand
+
+
+LstCategory=[]
+for i in df.Category:
+    LstCategory.append('CA'+str(i))
+    
+df['CCategory']=LstCategory
+
+LstCompany=[]
+for i in df.Company:
+    LstCompany.append('CO'+str(i))
+    
+df['CCompany']=LstCompany
+
+
+
+
+df.info()
+df.Offervalue=df.Offervalue.astype('category')
+df.info()
+df.shape
+pd.DataFrame(df).to_csv(r'D:\\Final project\\Datasets\\acquire-valued-shoppers-challenge\\ModelData\\DatasetComp.csv', index = False)
