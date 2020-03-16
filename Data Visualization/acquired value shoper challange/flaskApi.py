@@ -46,7 +46,14 @@ def predict():
     r=(Todydf.date.sub(df.iloc[Freq-1].Date)/np.timedelta64(1,'D')).iloc[0]
     tdf=pd.DataFrame({"R":[r],"F":[Freq],"M":[Pamt]})
     result=model.predict(tdf)
-    output = {'results': int(result[0])}
+    if int(result[0])==0:
+        result_L='LOW'
+    elif int(result[0])==1:
+        result_L='MEDIUM'
+    elif int(result[0])==2:
+        result_L='HIGH'
+    print(result_L)
+    output = {'results': result_L}
     print(result)
     return jsonify(results=output)
     

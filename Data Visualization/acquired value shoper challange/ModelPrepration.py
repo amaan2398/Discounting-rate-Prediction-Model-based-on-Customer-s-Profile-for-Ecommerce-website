@@ -88,7 +88,17 @@ for train_index, valid_index in kf.split(X_train):
      
 finalScore=dt.score(X_test, y_test)
 print(finalScore)
-
+'''
+Lst=[]
+for i in range(2,7):
+    for j in range(2,8):
+        for k in range(370,525):
+            tdf=pd.DataFrame({"R":[i],"F":[j],"M":[k]})
+            if int(model.predict(tdf)[0])==2:
+                Lst.append((i,j,k))
+for i in range(3):
+    print(Lst[random.randint(0,len(Lst))])
+'''
 #70-30
 #0.6557808093895282
 #80-20
