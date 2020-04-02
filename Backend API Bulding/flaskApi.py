@@ -22,12 +22,12 @@ def main():
     print (request.is_json)
     woocomm=request.get_json()
     print(woocomm)
-    x =  '{"response":'+str(random.randrange(0,3,1))+',"status":200,"mimetype":"application/json"}'
+    x =  '{"response":'+str(random.randrange(1,30,1))+'}'
     y = json.loads(x)
     return y
     
 @app.route("/discount_model",methods=['POST'])
-def predict():
+def dis_prediction_model():
     #get input
     ip=request.get_json(force=True)
     LstPD=[]
@@ -61,4 +61,4 @@ def predict():
 
 # running web app in local machine
 if __name__ == '__main__':
-    app.run(host='192.168.43.68', port='8099')#in plasc of ... use your ip or domain name to host your server
+    app.run(host='192.168.1.107', port='8099')#in plasc of ... use your ip or domain name to host your server
