@@ -145,7 +145,7 @@ for i in mcdic.keys():
 
 json_object = json.dumps(mcdic, indent = 4) 
   
-with open("json/FrequencyCount.json", "w") as outfile: 
+with open("json/MonCount.json", "w") as outfile: 
     outfile.write(json_object)
 
 for i in mcdic:
@@ -161,3 +161,38 @@ for i in range(df.shape[0]):
         m.append(1)
     else:
         m.append(0)
+
+df['RB']=r
+df['FB']=f
+df['MB']=m
+
+
+json_object = json.dumps(rmaxdic, indent = 4) 
+  
+with open("json/rTH.json", "w") as outfile: 
+    outfile.write(json_object)
+
+json_object = json.dumps(fmaxdic, indent = 4) 
+  
+with open("json/fTH.json", "w") as outfile: 
+    outfile.write(json_object)
+
+json_object = json.dumps(mmaxdic, indent = 4) 
+  
+with open("json/mTH.json", "w") as outfile: 
+    outfile.write(json_object)
+l=[]
+for i in range(df.shape[0]):
+    if (df.RB.iloc[i]==0 and df.FB.iloc[i]==0 and df.MB.iloc[i]==0):
+        l.append('N')
+    elif (df.RB.iloc[i]==1 and df.FB.iloc[i]==0 and df.MB.iloc[i]==0) or (df.RB.iloc[i]==0 and df.FB.iloc[i]==1 and df.MB.iloc[i]==0) or (df.RB.iloc[i]==0 and df.FB.iloc[i]==0 and df.MB.iloc[i]==1):
+        l.append('L')
+    elif (df.RB.iloc[i]==1 and df.FB.iloc[i]==1 and df.MB.iloc[i]==0) or (df.RB.iloc[i]==0 and df.FB.iloc[i]==1 and df.MB.iloc[i]==1) or (df.RB.iloc[i]==1 and df.FB.iloc[i]==0 and df.MB.iloc[i]==1):
+        l.append('M')
+    elif (df.RB.iloc[i]==1 and df.FB.iloc[i]==1 and df.MB.iloc[i]==1):
+        l.append('H')
+
+
+df['lable']=l
+
+df.to_csv(r'finaldata_v1.1.csv', index = False)
