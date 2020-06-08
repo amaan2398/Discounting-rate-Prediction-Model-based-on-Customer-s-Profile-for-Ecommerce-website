@@ -41,32 +41,41 @@ Every customer wants the best price, on the other hand, every retailer wants the
 	License: Apache 2.0
 
 **Tools:**
+
 IDE:
     PyCharm Community Edition for Flask API.
     Spider for the ML model
     Visual Studio Code and Atom for plugin
+
 Analysis:
     Weka for model testing and data analysis.
+
 Testing:
     Insomnia for testing Flask API and Plugin Rest API.
 
 **System Environment:**
-Processor:  2.5 gigahertz (GHz) or faster processor.
-RAM:    8 GB or more 
-Hard drive space: 48 GB for 64-bit OS or Higher
-Operating Systems: 		
-    Linux 18.04 or Higher
-    Windows 10
-GPU: NVIDIA GTX 1050(4 GB) Compute Capability 3.5 or higher.
-Language: Python 3.6.
-Tool:
-    Anaconda 3-5.2.0-Linux.
-    Anaconda3-5.2.0-Windows-x86_64.
-    Xampp v3.2.4
-Internet Connection:
-    Internet connectivity is necessary to download some Libraries. Internet connection required during the training of the ML model.
+
+Processor:  			2.5 gigahertz (GHz) or faster processor.
+
+RAM:    				8 GB or more 
+
+Hard drive space: 		48 GB for 64-bit OS or Higher
+
+Operating Systems:		Linux 18.04 or Higher
+						Windows 10
+
+GPU: 					NVIDIA GTX 1050(4 GB) Compute Capability 3.5 or higher.
+
+Language: 				Python 3.6.
+
+Tool:					Anaconda 3-5.2.0-Linux.
+						Anaconda3-5.2.0-Windows-x86_64.
+						Xampp v3.2.4
+
+Internet Connection: 	Internet connectivity is necessary to download some Libraries. Internet connection required during the training of the ML model.
 
 # Instructions for Deployment
+
 Step 1: Download and install Python 3.6.
 
 Step 2: Download and install WordPress on Web Server with WooCommerce Plugin.
