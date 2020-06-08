@@ -1,7 +1,7 @@
 <?php
 class loyaltydiscount{
-  public array $prodDiscount;
-  public float $t;
+  public $prodDiscount;
+  public $t;
   public $tax_toggle;
   public function __construct(array $prodDiscount, int $t)
   {

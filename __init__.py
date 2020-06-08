@@ -14,19 +14,27 @@ import numpy as np
 import requests
 from flask import Flask, request,render_template,jsonify
 
+#Removing WARNING
+from tensorflow.python.util import deprecation
+deprecation._PRINT_DEPRECATION_WARNINGS = False
+import tensorflow as tf
+tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+#Removing WARNING
+
 app = Flask(__name__,template_folder='template')
 model = pickle.load(open('.\\MLModel\\NuralNetworkModel.sav','rb'))
 model2 = pickle.load(open('.\\MLModel\\finalized_Decision_Tree_80+20_split.sav','rb'))
 
 @app.route("/discount_model",methods=['POST'])
 def dis_prediction_model():
-    pidDic={31 : 101,32 : 107,33 : 112,34 : 108,35 : 106,36 : 102,37 : 109,38 : 103,39 : 111,40 : 104,41 : 110,42 : 105}
     woocomm=request.get_json()
-    user = '' #add security code.
+    user = 'NzMyMDFlY2ZkODlkN2ZjNWFiNzM3ZDdl' #add security code.
     url = 'http://localhost/wordpress/wp-json/ld/v1'
     headers = {'SecurityKey':user}
     r = requests.post(url + '/posts/'+str(woocomm['id'])+'?pid='+str(woocomm['product_c']), headers=headers)
     ip=r.json()
+    pidDic={31 : 101,32 : 107,33 : 112,34 : 108,35 : 106,36 : 102,37 : 109,38 : 103,39 : 111,40 : 104,41 : 110,42 : 105}
     print(ip)
     Freq=len(ip)
     code=0
@@ -76,7 +84,9 @@ def dis_prediction_model():
         code=rlt[0]['lastOfferCode']
     return jsonify({"response":0,"code":code})
     
-
+@app.route("/")
+def start():
+    return "Flask API is Running."
 
 if __name__ == '__main__':
     app.run()
