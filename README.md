@@ -3,7 +3,8 @@ Every customer wants the best price, on the other hand, every retailer wants the
 
 # Dependencies and Requirements
 **Libraries used:**
-    flask 1.1.2:
+    
+	flask 1.1.2:
     Flask is a lightweight WGSI(Web Server Gateway Interface) web application framework. It began as a simple wrapper around werkzeug and jinja and has become one of the most popular Python web application frameworks
     License: BSD-3-Clause
  
@@ -40,14 +41,14 @@ Every customer wants the best price, on the other hand, every retailer wants the
 	License: Apache 2.0
 
 **Tools:**
-IDE: 
-PyCharm Community Edition for Flask API.
-Spider for the ML model
-Visual Studio Code and Atom for plugin
+IDE:
+    PyCharm Community Edition for Flask API.
+    Spider for the ML model
+    Visual Studio Code and Atom for plugin
 Analysis:
-Weka for model testing and data analysis.
+    Weka for model testing and data analysis.
 Testing:
-Insomnia for testing Flask API and Plugin Rest API.
+    Insomnia for testing Flask API and Plugin Rest API.
 
 **System Environment:**
 Processor:  2.5 gigahertz (GHz) or faster processor.
