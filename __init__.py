@@ -14,17 +14,11 @@ import numpy as np
 import requests
 from flask import Flask, request,render_template,jsonify
 
-#Removing WARNING
-from tensorflow.python.util import deprecation
-deprecation._PRINT_DEPRECATION_WARNINGS = False
-import tensorflow as tf
-tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-#Removing WARNING
-
 app = Flask(__name__,template_folder='template')
 model = pickle.load(open('.\\MLModel\\NuralNetworkModel.sav','rb'))
+model.compile(optimizer='adadelta',loss='sparse_categorical_crossentropy',metrics=['accuracy'])
 model2 = pickle.load(open('.\\MLModel\\finalized_Decision_Tree_80+20_split.sav','rb'))
+
 
 @app.route("/discount_model",methods=['POST'])
 def dis_prediction_model():
@@ -53,12 +47,11 @@ def dis_prediction_model():
         Todydf.date=Todydf.sort_values(by='date')
         r=(Todydf.date.sub(df.iloc[Freq-1].Date)/np.timedelta64(1,'D')).iloc[0]
         tdf=pd.DataFrame({"Recency":[r],"Frequency":[Freq],"Monetary":[Pamt],"CCategory_int":[pidDic[int(woocomm['product_c'])]]})
-        result1 = model.predict(tdf)
-        result = model2.predict(tdf)
+        result1 = list(model.predict(tdf)[0])
         r = requests.post(url + '/discount/'+str(woocomm['product_c']), headers=headers)
         rlt=r.json()
         print(result1,"Nural Network")
-        print(result,"RESULT")
+        result=[result1.index(max(result1))]
         resp=0
         if result[0]==3:
             code=int(ip[0]['lastOfferCode'])
@@ -83,10 +76,7 @@ def dis_prediction_model():
     if len(rlt)>=1:
         code=rlt[0]['lastOfferCode']
     return jsonify({"response":0,"code":code})
-    
-@app.route("/")
-def start():
-    return "Flask API is Running."
+
 
 if __name__ == '__main__':
     app.run()
