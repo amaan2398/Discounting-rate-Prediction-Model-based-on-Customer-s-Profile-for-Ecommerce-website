@@ -13,7 +13,8 @@ import pandas as pd
 import numpy as np
 import requests
 from flask import Flask, request,render_template,jsonify
-
+user = 'NzMyMDFlY2ZkODlkN2ZjNWFiNzM3ZDdl' #add security code.
+url = 'http://localhost/wordpress/wp-json/ld/v1'
 app = Flask(__name__,template_folder='template')
 model = pickle.load(open('.\\MLModel\\NuralNetworkModel.sav','rb'))
 model.compile(optimizer='adadelta',loss='sparse_categorical_crossentropy',metrics=['accuracy'])
@@ -23,8 +24,6 @@ model2 = pickle.load(open('.\\MLModel\\finalized_Decision_Tree_80+20_split.sav',
 @app.route("/discount_model",methods=['POST'])
 def dis_prediction_model():
     woocomm=request.get_json()
-    user = 'NzMyMDFlY2ZkODlkN2ZjNWFiNzM3ZDdl' #add security code.
-    url = 'http://localhost/wordpress/wp-json/ld/v1'
     headers = {'SecurityKey':user}
     r = requests.post(url + '/posts/'+str(woocomm['id'])+'?pid='+str(woocomm['product_c']), headers=headers)
     ip=r.json()
