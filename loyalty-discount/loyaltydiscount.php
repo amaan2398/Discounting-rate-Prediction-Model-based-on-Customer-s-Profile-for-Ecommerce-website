@@ -9,11 +9,12 @@
   if (!defined('ABSPATH')) {
       exit;
   }
-
+  global $URL="127.0.0.1:5000/discount_model";
   define("PLUGIN_DIR_PATH",plugin_dir_path(__FILE__));
   define("PLUGIN_URL",plugins_url());
   define("PLUGIN_VERSION","0.1");
   include_once(PLUGIN_DIR_PATH."/includes/class-loyalty-discount.php");
+  
   global $ld;
   $ld =new loyaltydiscount(array(),0);
   include_once(PLUGIN_DIR_PATH."/packages/loyaltydiscount-rest-api/rest-api.php");

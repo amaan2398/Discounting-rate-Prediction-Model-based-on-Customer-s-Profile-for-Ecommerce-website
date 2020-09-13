@@ -2,9 +2,10 @@
 
 
 function api_call($cust_id,$pid){
+  global $URL;
   $arrjs=array("id"=>$cust_id,"product_c"=>$pid);
   $send_json=json_encode($arrjs);
-  $url="127.0.0.1:5000/discount_model";
+  $url=$URL;
   $ch= curl_init($url);
   curl_setopt($ch,CURLOPT_POSTFIELDS,$send_json);
   curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type:application/json'));
